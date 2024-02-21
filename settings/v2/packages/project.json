@@ -1,0 +1,38 @@
+{
+  "__version__": "1.0.4",
+  "general": {
+    "designResolution": {
+      "height": 450,
+      "width": 800,
+      "fitHeight": true
+    }
+  },
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "BULLET"
+      },
+      {
+        "index": 2,
+        "name": "CHARACTER"
+      },
+      {
+        "index": 3,
+        "name": "Glow"
+      },
+      {
+        "index": 4,
+        "name": "GlowCheck"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 7,
+      "1": 1,
+      "2": 41,
+      "3": 20,
+      "4": 8,
+      "5": 4
+    }
+  }
+}
