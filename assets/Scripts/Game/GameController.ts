@@ -3,7 +3,6 @@ import { GameModel } from './GameModel';
 import { ObjectPool } from '../Pool/ObjectPool';
 import { NodeCustom } from '../Pool/NodeCustom';
 import { Constants } from '../Data/Constants';
-import { GameCenterController } from '../GameCenterController/GameCenterController';
 import { AudioController } from '../AudioController/AudioController';
 const { ccclass, property } = _decorator;
 
@@ -95,12 +94,6 @@ export class GameController extends Component {
         type: CCInteger
     })
     private firerateRocket: number = 10000;
-
-    @property({
-        type: GameCenterController,
-        tooltip: 'Game Center'
-    })
-    private gameCenter: GameCenterController;
 
     @property({
         type: Node
@@ -586,9 +579,6 @@ export class GameController extends Component {
                             this.OverLabel.active=false;
                             this.countScore = 0
                             this.OverPandel.active = true;
-                            this.gameCenter.completeMatch(() => {}, {
-                                score: Math.floor(this.Score),
-                            });
                             this.saveBestScore();
                         }
                     });
@@ -612,15 +602,14 @@ export class GameController extends Component {
                     }
                     this.OverPandel.active = true;
                 }
-                this.gameCenter.completeMatch(() => {}, {
-                    score: Math.floor(this.Score),
-                });
-
                 this.saveBestScore();
             }
             if (otherCollider.tag === 8 && this.ShieldStatus === false) {
                 this.gameModel.Character.getComponent(RigidBody2D).enabled=false;
-                this.rocket.active=false;
+                if( this.rocket)
+                {
+                    this.rocket.active=false;
+                }
                 this.checkGamepover = true;
                 this.audioController.onAudio(5)
                 this.touchEnd();
@@ -644,10 +633,6 @@ export class GameController extends Component {
                     await this.delay(300);
                 }
                 this.OverPandel.active = true;
-                this.gameCenter.completeMatch(() => {}, {
-                    score: Math.floor(this.Score),
-                });
-
                 this.saveBestScore();
             }
         }
